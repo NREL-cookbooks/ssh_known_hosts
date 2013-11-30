@@ -24,7 +24,8 @@ action :create do
   Chef::Application.fatal! "Could not resolve #{new_resource.host}" if key =~ /getaddrinfo/
 
   # Ensure that the file exists and has minimal content (required by Chef::Util::FileEdit)
-  file node['ssh_known_hosts']['file'] do
+  file "#{node['ssh_known_hosts']['file']}_exists_#{new_resource.host}" do
+    path node['ssh_known_hosts']['file']
     action        :create
     backup        false
     content       '# This file must contain at least one line. This is that line.'

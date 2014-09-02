@@ -61,8 +61,4 @@ private
     keys.any? do |line|
       line.match(/#{Regexp.escape(comment)}|#{Regexp.escape(key)}/)
     end
-    not_if do
-      ::File.exists?(node['ssh_known_hosts']['file']) &&
-      ::File.readlines(node['ssh_known_hosts']['file']).any? { |line| line.match(/#{Regexp.escape(comment)}|#{Regexp.escape(key)}/) }
-    end
   end
